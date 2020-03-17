@@ -55,8 +55,36 @@ component, formatting, style, styling, insert
 \end{IEEEkeywords}
 
 \section{Introduction}
-This document is a model and instructions for \LaTeX.
-Please observe the conference page limits. 
+In this era, social media is one of important parts of our lives.
+Social media makes easier to get news and share with friends online.
+However, at the same moment, 
+there are also information includes less credibility.
+Some of them have obvious misinformation that are made by malicious purpose,
+we call them ``fake news''.
+
+Fake news try to make wrong rumors on social media by spreading on social media.
+Last year, a picture was spread on Russian social media which shows someone with an Estonian flag on their sleeve beating the protester.
+After this, Estonian volunteers identified this picture as a fake news\cite{vaikmaa_2019}.
+In addition, fake news created some mayhem not only online, but also offline (real incidents)
+e.g. in Washington, fake news about the Pizzagate conspiracy is reported to have motivated the shooting\cite{agencies_2016}.
+Spreading fake news also shakes premise of democracy due to people cannot get accurate information.
+Therefore, there are some researches which try to spot fake news by machine learning.
+
+The challenging point of this is there are news article which try to deceive readers
+and this makes harder to classify by simple rule-based method.
+To get more information to detection,
+there are some works which aggregate social context i.e. Retweet, Like, and comments
+report better results than only considering news text\cite{Guo:2018:RDH:3269206.3271709}.
+However, social contexts are not able to get before spreading.
+Hence, there is also a work which generate words of comments from news by CVAE to detect fake news when they are just posted\cite{ijcai2018-533}.
+Their work tries to generate comments, but generated ones are only words which have high probability of appearing.
+
+In this work, we will propose a model which evaluate news credibility by news text and generated comments by Seq-GAN\cite{Yu:2017:SSG:3298483.3298649}.
+This model train not only news features but also generating comments.
+In training sequence includes real posted comments but test sequence does not use them in order to simulate operation in real-social media.
+The skill of generating comments help classification in test sequence.
+
+We plan to measure performance of our proposed method by some experiments with real-posted dataset and some state-of-the-art fake news detection algorithms.
 
 \section{Ease of Use}
 
@@ -260,15 +288,8 @@ element symbols.
 For papers published in translation journals, please give the English 
 citation first, followed by the original foreign-language citation \cite{b6}.
 
-\begin{thebibliography}{00}
-\bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
-\end{thebibliography}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,myreferences}
 \vspace{12pt}
 \color{red}
 IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
