@@ -62,9 +62,9 @@ there are also information includes less credibility.
 Some of them have obvious misinformation that are made by malicious purpose,
 we call them ``fake news''.
 
-Fake news try to make wrong rumors on social media by spreading on social media.
-Last year, a picture was spread on Russian social media which shows someone with an Estonian flag on their sleeve beating the protester.
-After this, Estonian volunteers identified this picture as a fake news\cite{vaikmaa_2019}.
+Fake news try to make wrong rumors by spreading on social media.
+This year, there are so many fake news about COVID-19 and sometimes these make wrong rumors.
+Directer of General of the WHO called this problem ``infodemic'' and he told that fake news spreads faster and more easily than this virus\cite{ZAROCOSTAS2020676}. 
 In addition, fake news created some mayhem not only online, but also offline (real incidents)
 e.g. in Washington, fake news about the Pizzagate conspiracy is reported to have motivated the shooting\cite{agencies_2016}.
 Spreading fake news also shakes premise of democracy due to people cannot get accurate information.
@@ -79,8 +79,8 @@ However, social contexts are not able to get before spreading.
 Hence, there is also a work which generate words of comments from news by CVAE to detect fake news when they are just posted\cite{ijcai2018-533}.
 Their work tries to generate comments, but generated ones are only words which have high probability of appearing.
 
-In this work, we will propose a model which evaluate news credibility by news text and generated comments by Seq-GAN\cite{Yu:2017:SSG:3298483.3298649}.
-This model train not only news features but also generating comments.
+In this work, we will propose a model which evaluate news credibility by news text and generated comments.
+This model is modified from generating fake news article\cite{NIPS2019_9106} and this train not only news features but also generating comments.
 In training sequence includes real posted comments but test sequence does not use them in order to simulate operation in real-social media.
 The skill of generating comments help classification in test sequence.
 
