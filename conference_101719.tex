@@ -46,13 +46,21 @@ ohsuga@uec.ac.jp}
 \maketitle
 
 \begin{abstract}
-This document is a model and instructions for \LaTeX.
-This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-or Math in Paper Title or Abstract.
+Recently, fake news spread via social networks and make the wrong rumor faster.
+This problem is serious because the wrong rumor sometimes make social damage via deceived people.
+Fact-checking is an ordinary solution to measure the credibility of news articles.
+However this process usually takes a long time and it is hard to make it before spreading the wrong rumor.
+Automatic detection of fake news is a popular researching topic.
+It is confirmed that considering not only articles but also social context(i.e. likes, retweets, replies, comments, etc.) supports to spot fake news correctly by them.
+This type is also hard to detect fake news before spreading the wrong rumor because social context is made with spreading on social networks.
+We propose a fake news detector with generating part of the social context which is extended from the fake news generator model.
+This model is trained about generating comments and classification of real/fake by dataset which is combined news and comments.
+To measure this model's classification quality, we checked classification results from articles with real comments and generated ones by itself.
+We compared results between classified with attached a generated comment and real comments only and we got results that considering a generated comment help detect more fake news than considering real comments only.
 \end{abstract}
 
 \begin{IEEEkeywords}
-component, formatting, style, styling, insert
+fake news, neural network, style, styling, insert
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -86,6 +94,11 @@ In training sequence includes real posted comments but test sequence does not us
 The skill of generating comments help classification in test sequence.
 
 We measure performance of our proposed method by some experiments with real-posted dataset.
+
+\section{Related works}
+\subsection{Fact checking}
+\subsection{Detecting fake news}
+\subsection{Generating fake news}
 
 \section{methodology}
 
