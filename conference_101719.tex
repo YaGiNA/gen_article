@@ -127,6 +127,10 @@ We also found the difference between generated comments from real and fake news.
     \item ``breaking:'' was the second of the percentage point between frequency(fake was more than real). the delta was c. 0.7 percentage point.
 \end{itemize}
 \subsection{Quality of classify}
+We measured effect of generated comment for classification by comparing classification without a generated comment.
+We prepared baselines: classify by only news article, with two real-posted comments.
+We used pair of an article of GossipCop and tweets instead because ones of PolitiFact were too few to make classification accurate.
+We sampled same rule but both of real and fake labels have 2000 sets.
 
 \begin{table}[!t]
     \renewcommand{\arraystretch}{1.3}
