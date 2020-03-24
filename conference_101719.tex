@@ -105,8 +105,41 @@ We measure the performance of our proposed method by some experiments with a rea
 \subsection{Classifying news and comments}
 
 \section{results}
-\subsection{Quality of classify}
 \subsection{Word generation tendency}
+First of all, we investigated difference between generated comments from real and fake news.
+We generated comments which make reference to news articles which are fact-checked by PolitiFact.
+This dataset contains sets of a news article and tweets which refer to it.
+We filtered news which have at least three tweets and sampled three tweets for generating.
+We used these indexes: times of used words, percentage of used words, and the gap of percentage point of used words of generated comments from real and fake.
+We removed extra elements: stop words by NLTK, url(starts with \textit{http, https}), and part of symbols.
+We didn't removed mentions, colons, and hashtags(i.e. @anyone, analyse: \#anything).
+We found these features of all generated comments:
+\begin{itemize}[\IEEEsetlabelwidth{3}]
+    \item The most generated word was ``via''(c. 1.5\%).  
+    \item ``via'' was also top frequency of generated word from both of real and fake. 
+    \item The second and third were ``trump'' and ``obama'' but both of their percentages was under 1\%.
+\end{itemize}
+We also found the difference between generated comments from real and fake news.
+\begin{itemize}[\IEEEsetlabelwidth{3}]
+    \item The percent about frequency of ``via'' in generated comments from fake news article was twice as much as ones from real news.
+    \item ``via'' was also the most gap of frequency between generated comments from real and fake.  The delta was c. 0.9 percentage point.
+    \item ``breaking:'' was the second of the percentage point between frequency(fake was more than real). the delta was c. 0.7 percentage point.
+\end{itemize}
+\subsection{Quality of classify}
+
+\begin{table}[!t]
+    \renewcommand{\arraystretch}{1.3}
+    \caption{A Simple Example Table}
+    \label{classify_results}
+    \centering
+    \begin{tabular}{lccc}
+    \hline 
+    Model name                                     & Precision & Recall & F1 score \\ \hline
+    Article only                                   &           &        &          \\
+     + Real comment * 2                     & 0.682     & 0.750  & 0.714    \\
+     + Generated comment & 0.590     & 0.790  & 0.675    \\ \hline
+    \end{tabular}
+    \end{table}
 \section{discussion}
 
 \bibliographystyle{IEEEtran}
