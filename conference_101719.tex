@@ -106,13 +106,14 @@ We measure the performance of our proposed method by some experiments with a rea
 
 \section{results}
 \subsection{Word generation tendency}
-First of all, we investigated difference between generated comments from real and fake news.
-We generated comments which make reference to news articles which are fact-checked by PolitiFact.
-This dataset contains sets of a news article and tweets which refer to it.
+First of all, we investigated the difference between generated comments from real and fake news.
+We generated comments which refer to news articles that are fact-checked by PolitiFact.
+This dataset contains sets of a news article and tweets(comments) which refer to it.
 We filtered news which have at least three tweets and sampled three tweets for generating.
-We used these indexes: times of used words, percentage of used words, and the gap of percentage point of used words of generated comments from real and fake.
+Both of real and fake labels have 200 sets of an article and comments and we trained to generate comments. 
+We used these indexes: times of used words, percentage of used words, and the gap of a percentage point of used words of generated comments from real and fake.
 We removed extra elements: stop words by NLTK, url(starts with \textit{http, https}), and part of symbols.
-We didn't removed mentions, colons, and hashtags(i.e. @anyone, analyse: \#anything).
+We didn't remove mentions, colons, and hashtags(i.e. @anyone, analyze: \#anything).
 We found these features of all generated comments:
 \begin{itemize}[\IEEEsetlabelwidth{3}]
     \item The most generated word was ``via''(c. 1.5\%).  
