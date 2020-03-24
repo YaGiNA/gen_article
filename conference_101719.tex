@@ -106,6 +106,7 @@ We measure the performance of our proposed method by some experiments with a rea
 
 \section{results}
 \subsection{Word generation tendency}
+\label{subsec:trend}
 First of all, we investigated the difference between generated comments from real and fake news.
 We generated comments which refer to news articles that are fact-checked by PolitiFact.
 This dataset contains sets of a news article and tweets(comments) which refer to it.
@@ -130,19 +131,20 @@ We also found the difference between generated comments from real and fake news.
 We measured effect of generated comment for classification by comparing classification without a generated comment.
 We prepared baselines: classify by only news article, with two real-posted comments.
 We used pair of an article of GossipCop and tweets instead because ones of PolitiFact were too few to make classification accurate.
-We sampled same rule but both of real and fake labels have 2000 sets.
-
+We sampled same rule of \ref{subsec:trend} but both of real and fake labels have 2000 sets.
+The result of classification is Table \ref{fig:classify_results}.
+Our proposed method was best of recall score but precision is worse than consider without generated comments.
 \begin{table}[!t]
     \renewcommand{\arraystretch}{1.3}
-    \caption{A Simple Example Table}
-    \label{classify_results}
+    \caption{Results of classification}
+    \label{fig:classify_results}
     \centering
     \begin{tabular}{lccc}
     \hline
     Model name           & Precision & Recall & F1 score \\ \hline
     Article only         & 0.647     & 0.615  & 0.631    \\
-     + Real comment * 2  & 0.682     & 0.750  & 0.714    \\
-     + Generated comment & 0.590     & 0.790  & 0.675    \\ \hline
+     + Real comment * 2  & \textbf{0.682}     & 0.750  & \textbf{0.714}    \\
+     + Generated comment & 0.590     & \textbf{0.790}  & 0.675    \\ \hline
     \end{tabular}
     \end{table}
 \section{discussion}
