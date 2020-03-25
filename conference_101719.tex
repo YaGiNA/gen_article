@@ -9,6 +9,12 @@
 \usepackage{xcolor}
 \usepackage{flushend}
 \usepackage[dvipdfmx]{graphicx}
+\ifCLASSOPTIONcompsoc
+    \usepackage[caption=false, font=normalsize, labelfont=sf, textfont=sf]{subfig}
+\else
+\usepackage[caption=false, font=footnotesize]{subfig}
+\fi
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
@@ -58,6 +64,7 @@ We propose a fake news detector with generating part of the social context which
 This model is trained about generating comments and classification of real/fake by dataset which is combined news and comments.
 To measure this model's classification quality, we checked classification results from articles with real comments and generated ones by itself.
 We compared results between classified with attached a generated comment and real comments only and we got results that considering a generated comment help detect more fake news than considering real comments only.
+It suggests that our proposed model will help to spot fake news on social networks.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -72,11 +79,27 @@ there is also information that includes less credibility.
 Some of them have obvious misinformation that is made by malicious purpose,
 we call them ``fake news''.
 
+\begin{figure}[!t]
+    \centering
+    \includegraphics[width=\linewidth]{fact-check.pdf}
+    \label{fig:example}
+    \caption{
+        An example of fact-checking. It confirmed that April Fool's prank.
+        The blue arrows shows the posted date of fake news and fact-checking.
+        There are 25 days between posting fake news and fact-checking.
+    }
+\end{figure}
+
+
 Fake news try to make wrong rumors by spreading on social media.
 This year, there is so much fake news about COVID-19 and sometimes these make wrong rumors online.
 Directer of General of the WHO called this problem ``infodemic'' and he told that fake news spreads faster and more easily than itself\cite{ZAROCOSTAS2020676}. 
 Besides, fake news created some mayhem not only online, but also offline (real incidents)
 e.g. in Washington, fake news about the Pizzagate conspiracy is reported to have motivated the shooting\cite{agencies_2016}.
+Nowadays, fact-checking is the most token method to spot fake news.
+This is a process of evaluating for news by people who has knowledge of news topic.
+Fig. \ref{fig:example} is an example of fact-checking\cite{gillin_2017}.
+However, this takes so long time and it is hard to spot before spreading.
 Spreading fake news also shakes the premise of democracy due to people cannot get accurate information.
 Therefore, some researches try to spot fake news by machine learning.
 
