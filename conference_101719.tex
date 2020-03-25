@@ -127,6 +127,13 @@ We tried to extend this model and generate naturally comments.
 Like \ref{subsec:generate}, the original Grover model was trained by news which had five parts.
 Each part is attached start and end token and some of them are dropped to predict.
 We replaced the other part of the article to three comments and tried to predict one of the comments.
+We modeled by the joint distribution alongside the original one:
+\begin{equation}
+    \label{eq:joint_distri}
+    p = (\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
+    \end{equation}
+The original one was made for generation of fake news but our proposed model was arranged to generate comments.
+
 \begin{figure*}[!t]
     \centering
     \includegraphics[width=\linewidth,pagebox=cropbox,clip]{fig_method.pdf}
