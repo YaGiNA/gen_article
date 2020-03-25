@@ -127,6 +127,16 @@ We tried to extend this model and generate naturally comments.
 Like \ref{subsec:generate}, Original grover model trained by news which are five parts.
 Each part is attached start and end token and some of them are dropped to predict.
 We replaced the other part of article to three comments and tried to predict one of comment.
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=\linewidth,pagebox=cropbox,clip]{fig.pdf}
+    \caption{
+        An ordinary diagram of two generation of our proposed method.
+        (a) shows that model is generated from partly dropped contexts for comments.
+        (b) shows that model is generated from contexts which includes a generated comment from (a).
+    }
+    \label{fig:method}
+\end{figure*}
 \section{results}
 \subsection{Word generation tendency}
 \label{subsec:trend}
