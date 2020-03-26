@@ -155,8 +155,9 @@ We modeled by the joint distribution alongside the original one:
     \label{eq:joint_distri}
     p = (\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
 \end{equation}
-The last token of integrated sequences were \texttt{[CLS]} and this was used for classification of credibility following the original one.
-The original one was made for generation of fake news but our proposed model was arranged to generate comments.
+This model's diagram is Fig. \ref{fig:method}.
+Basically it was replaced for comments from Grover model's news structure except for article.
+The purpose of our model was to generate comments more likely written by humans.
 
 \begin{figure*}[!t]
     \centering
@@ -168,6 +169,18 @@ The original one was made for generation of fake news but our proposed model was
     }
     \label{fig:method}
 \end{figure*}
+
+The last token of integrated sequences were \texttt{[CLS]} and this was used for classification of credibility following the original one.
+The original one was made for generation of fake news but our proposed model was arranged to generate comments.
+Fig.\ref{fig:process} shows our process of experiment.
+
+\begin{figure*}[!t]
+    \centering
+    \includegraphics[width=0.8\linewidth,pagebox=cropbox,clip]{fig_process.pdf}
+    \caption{The process of our experiment.}
+    \label{fig:process}
+\end{figure*}
+
 \section{results}
 \subsection{Word generation tendency}
 \label{subsec:trend}
