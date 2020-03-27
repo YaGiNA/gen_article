@@ -52,7 +52,7 @@
     \IEEEauthorblockA{\textit{Department of Informatics} \\
         \textit{University of Electro-Communications}\\
         Tokyo, Japan \\
-        sei@uec.ac.jp}
+        seiuny@uec.ac.jp}
     \\
     %5th
     \IEEEauthorblockN{Akihiko Ohsuga}
@@ -65,19 +65,20 @@
 \maketitle
 
 \begin{abstract}
-Recently, fake news is shared via social networks and makes false rumors more diffusible.
+Recently, fake news is shared via social networks and makes wrong rumors more diffusible.
 This problem is serious because the wrong rumor sometimes make social damage by deceived people.
 Fact-checking is a solution to measure the credibility of news articles.
 However the process usually takes a long time and it is hard to make it before their diffusion.
 Automatic detection of fake news is a popular researching topic.
-It is confirmed that considering not only articles but also social contexts(i.e. likes, retweets, replies, comments) supports to spot fake news correctly by them.
-Likewise, since the social contexts are also made by sharing on the social network, it is hard to detect fake news earlier.
-We propose a fake news detector with the ability to generate fake social contexts, aiming to detect such fake news as to spread only if accompanied by a certain context. The fake context generation is based on a fake news generator model. 
-This model is trained about generating comments by dataset which is combined news and comments.
-In addition, we also trained the model in classifying news and comments which include generated one into real and fake.
-To measure this model's detection quality, we checked classification results from articles with real comments and generated ones by itself.
-As a result, we conclude that considering a generated comment supports detect more fake news than considering real comments only.
-It suggests that our proposed model will help to spot fake news on social networks.
+It is confirmed that considering not only articles but also social contexts(i.e. likes, retweets, replies, comments) supports to spot fake news correctly.
+However, the social contexts are naturally unavailable when an article comes out, making early fake news detection by means of the social context useless.
+We propose a fake news detector with the ability to generate fake social contexts, aiming to detect fake news in early stage of its diffusion where few social contexts are available.
+The fake context generation is based on a fake news generator model. 
+This model is trained to generate comments using a dataset which consists of news articles and their social contexts.
+In addition, we also trained a model to classify news and comments into real ones and generated ones.
+To measure our detector’s effectiveness, we examined performance of the generated comments for articles with real comments and generated ones by the classify model.
+As a result, we conclude that considering a generated comment help detect more fake news than considering real comments only.
+It suggests that our proposed detector will be effective to spot fake news on social networks.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -134,7 +135,7 @@ We measure the performance of our proposed method by some experiments with a rea
 
 \section{Related works}
 To detect and classify fake news is not a new topic because it is so similar to detecting spam\cite{shen2017discovering}, rumor\cite{7023340}, and illegal advertisement\cite{Huang:2017:DFO:3041021.3054233}.
-Following some previous works\cite{Shu:2017:FND:3137597.3137600,Ruchansky:2017:CHD:3132847.3132877,Wang:2018:EEA:3219819.3219903}, we define fake news as news that is intentionally fabricated and can be verified as false.
+Following some previous works\cite{Shu:2017:FND:3137597.3137600,Ruchansky:2017:CHD:3132847.3132877,Wang:2018:EEA:3219819.3219903}, we define fake news as news that is intentionally fabricated and can be verified as wron.
 
 \subsection{Detecting fake news}
 There are many works which detect fake news with only news content.
