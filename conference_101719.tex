@@ -95,12 +95,12 @@ We call them ``fake news''.
 \begin{figure}[!t]
     \centering
     \includegraphics[width=\linewidth]{fact-check.pdf}
-    \label{fig:example}
     \caption{
         An example of fact-checking. It is confirmed as an April Fool's prank.
         The blue arrows show the posted date of the fake news and the fact-checking result.
         It takes 25 days for the news to be verified as \textit{fake}.
         }
+    \label{fig:example}
 \end{figure}
 
 
@@ -134,7 +134,8 @@ We measure the performance of our proposed method by experiments with a real pos
 
 \section{Related works}
 To detect and classify fake news is not a new topic because it is similar to detecting spam\cite{shen2017discovering}, rumor\cite{7023340}, and false advertisement\cite{Huang:2017:DFO:3041021.3054233}.
-Following previous works\cite{Shu:2017:FND:3137597.3137600,Ruchansky:2017:CHD:3132847.3132877,Wang:2018:EEA:3219819.3219903}, we define fake news as news that is intentionally fabricated and can be verified as wron.
+Following previous works\cite{Shu:2017:FND:3137597.3137600,Ruchansky:2017:CHD:3132847.3132877,Wang:2018:EEA:3219819.3219903},
+we define fake news as news that is intentionally fabricated and can be verified as wrong.
 
 \subsection{Detecting fake news}
 There are many works which detect fake news based on the news content only.
@@ -149,7 +150,7 @@ post-based\cite{Yang2019UnsupervisedFN,Tacchini2017SomeLI,Jin:2016:NVE:3016100.3
 
 Considering the social context, the detection must wait for a while from posting of an article because social contexts are made by users who are exposed to the article.
 Therefore, Two-Level Convolutional Neural Network with User Response Generator(TCNN-URG) was proposed\cite{ijcai2018-533}.
-This generates comment by hidden variables which are trained by a probability distribution of comment appearance.
+This generates comment by hidden variables which are trained by a probability distribution of comments appearance.
 Generated comments can give additional information to classify posts and the model is available even if the news is just posted.
 However, the TCNN-URG generates only words that have a high probability of appearance in a comment and there are no grammar elements.
 
@@ -178,10 +179,9 @@ The purpose of our model was to generate not articles but comments likely to be 
     \centering
     \includegraphics[width=\linewidth,pagebox=cropbox,clip]{fig_method.pdf}
     \caption{
-        An ordinary diagram of two generations of our proposed method.
-        (a) shows that one of the comments was generated from partly dropped contexts for comments.
-        (b) shows that another one was generated from contexts that include a generated comment from (a).
-    }
+        Two cases of comment generation with our proposed model. 
+        (a) shows a case where a comment was generated from an article and a real-posted comment. 
+        (b) shows another case where a comment was generated from data that includes the generated comment in (a).    }
     \label{fig:method}
 \end{figure*}
 
@@ -203,31 +203,41 @@ Fig.\ref{fig:process} shows our process of experiment.
 First of all, we investigated the difference between generated comments from real and fake news.
 We generated comments which refer to news articles that are fact-checked by PolitiFact from the FakeNewsNet dataset\cite{Shu2018FakeNewsNetAD}.
 This dataset contains sets of a news article and tweets(comments) which refer to it.
-We filtered news which have at least three tweets and sampled three tweets for generating.
-Both real and fake labels have 200 sets of a news article and comments and we trained to generate comments. 
-We used these indexes: times of used words, percentage of used words, and the gap of a percentage point of used words of generated comments from real and fake.
-We removed extra elements: stop words by NLTK, url(starts with \textit{http, https}), and part of symbols.
+We chose news which have at least three tweets and sampled three tweets for comment generation.
+We prepared 200 sets of a news article and comments for each of real and fake classes and trained the model to generate comments.
+We used the following indexes to evaluate words appeared in the generated comments:
+the number of the occurrence of the words,
+ratio of the word's occurrence among the total number of words,
+the difference between the percentages for real and fake classes.
+We converted all alphabets to lowercase letter.
+We removed the following elements: stop words by NLTK\cite{bird-loper-2004-nltk}, 
+url(starts with \textit{http, https}), and ascii symbols.
 We didn't remove mentions, colons, and hashtags(i.e. @anyone, analyze:, \#anything).
-We found these features of all generated comments:
+We found the following by the analysis of the generated comments:
 \begin{itemize}[\IEEEsetlabelwidth{3}]
-    \item The most generated word was ``via''(approx. 1.5\%).  
-    \item ``via'' was also the top frequency of generated word from both real and fake. 
-    \item The second and third were ``trump'' and ``obama'' but both of their percentages were under 1\%.
-    \item The generated comments seemed to be not accurate in grammar.
+    \item The most frequent word was ``via''(approx. 1.5\%) in the aggregated frequency in real and fake.  
+    \item The second and third were ``trump'' and ``obama'' however both of their percentages were under 1\%.
 \end{itemize}
-We also found the difference between generated comments from real and fake news.
+We also found the following from the difference between generated comments from real and fake news.
 \begin{itemize}[\IEEEsetlabelwidth{3}]
+    \item ``Via'' was also the top frequency of generated word from both real and fake. 
     \item The percent of the frequency of ``via'' in generated comments from fake news article was twice as much as ones from real news.
-    \item ``via'' was also the most gap of frequency between generated comments from real and fake.  The delta was approx. 0.9 percentage point.
-    \item ``breaking:'' was the second of the most percentage point between frequency(fake was more than real). the delta was approx. 0.7 percentage point.
+    \item ``Via'' was also the word with the largest margin of the percentages between real and fake classes. 
+    The margin was approx. 0.9 point.
+    \item ``Breaking:'' was the word with the second largest margin of the percentages between real and fake classes, 
+    where one for the fake was more than the real. 
+    The margin was approx. 0.7 point.
 \end{itemize}
 \subsection{Quality of classify}
-We measured the effect of generated comment for classification by comparing classification without a generated comment.
-We prepared baselines: classify by only a news article, with two real-posted comments.
-We used pairs of an article of GossipCop and tweets instead because ones of PolitiFact were too few to make classification accurate.
-We sampled the same rule of \ref{subsec:trend} but both real and fake labels have 2000 sets.
+We measured the effect of generated comment for classification by comparing classification results with and without the generated comments.
+We prepared baselines: classification with the news article only, and with the article and two real-posted comments.
+In this experiment we used pairs of an article of
+GossipCop, another data available in the FakeNewsNet dataset, and tweets referring it instead of PolitiFact because the latter has too few data to make the experiment meaningful.
+We sampled the same rule as \ref{subsec:trend} although we collect 2000 sets each for the real and fake classes.
 The result of classification is Table \ref{tbl:classify_results}.
-Our proposed method was best of recall s core but precision was worse than consider without generated comments.
+Our proposed method achieved the best recall score however in precision it was outperformed by models that disregard the generated comments.
+On the whole, the generated comments seemed to be not accurate in grammar.
+
 \begin{table}[!t]
     \renewcommand{\arraystretch}{1.3}
     \caption{Results of classification}
@@ -243,26 +253,29 @@ Our proposed method was best of recall s core but precision was worse than consi
     \end{table}
 \section{discussion}
 \subsection{Generating comments}
-According to trends of words in generated comments, our proposed method seemed to be trained by the credibility of news articles.
+According to trends of words in generated comments,
+our proposed method seemed to be trained by the topics of news articles.
 Most of the generated comments referred to topics of politics and this may be caused by the character of the dataset.
 
-The interesting word of generated comment is ``breaking:''.
+An interesting word in the generated comments is ``breaking:''.
 Our experiment results showed that this word was more generated by fake news than real news.
-This phenomenon was also confirmed in the research of TCNN-URG\cite{ijcai2018-533}.
+This phenomenon was not confirmed in the research of TCNN-URG\cite{ijcai2018-533}.
+Their research claimed that ``!'', ``?'' and any words were important signals of fake news.
+"Breaking:" may be also signal of fake news.
 
-The quality of the grammar was clearly not as good as it should have been by human A/B testing.
+The grammatical quality of the generated comments was clearly not as good as the need to do human A/B testing.
 This is caused by a lack of dataset scale. 
-Grover article used 120 gigabytes of dataset\cite{NIPS2019_9106}.
-We need to search or get a more large dataset of sets of articles and tweets.
+Grover model was built using 120 gigabytes of dataset\cite{NIPS2019_9106}.
+We need to search or get a larger dataset of sets of articles and tweets.
 
 \subsection{classification}
-According to TABLE \ref{tbl:classify_results}, our proposed model made the best score of recall but precision was the worst score.
-This means the proposed model can detect more fake news than another model which doesn't use generated comments even if social contexts are limited. 
+According to TABLE \ref{tbl:classify_results}, our proposed model achieved the best recall score however in precision its performance was worst.
+This means the proposed model can detect more fake news than another model which disregards generated comments even if available social contexts are limited. 
 
-The trend suggests that this model helps for people who search for news which are needed to fact-checking. 
-However, the model also detected more not fake news than another one so this is a point of improvement.
-We will check if the trend is changed by scale of dataset.
-\subsection{Suggestions of improvements}
+The trend suggests that this model helps people who search for news which require fact-checking. 
+However, the model also detected more false fake news than another one therefore we need to make an improvement.
+We will check if the trend is changed by using a larger dataset.
+
 \appendix[Settings of experiments]
 \label{app:settings}
 \begin{itemize}[\IEEEsetlabelwidth{3}]
