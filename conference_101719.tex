@@ -1,7 +1,6 @@
 \documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
-\DeclareFontShape{JT2}{mc}{m}{sc}{<->ssub*mc/m/n}{}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
@@ -117,21 +116,21 @@ However, this takes so long that it is hard to spot a piece of fake news before 
 Fake news also shakes the premise of democracy due to people cannot get accurate information.
 Therefore, researches try to detect fake news by machine learning.
 
-The challenging point of this is there are news articles which try to deceive readers
-and this makes it harder to classify by a simple rule-based method.
-To get more information to detection,
-there are some works which aggregate social context(i.e. Retweet, Like, and comments)
-report better results than only considering news text\cite{Guo:2018:RDH:3269206.3271709}.
-However, social contexts are not able to get before sharing.
-Hence, there is also a work that generates words of comments from the news by CVAE to detect fake news when they are just posted\cite{ijcai2018-533}.
-Their work tries to generate comments, but generated ones are only words that have a high probability of appearing.
+The challenge of this work is there are news articles which try to deceive readers on purpose
+and this makes it harder to classify them by a simple rule-based method.
+Trying to supplement information for detection,
+there are some works which aggregate social context(i.e. retweet, like, and comments)
+report better results than considering news text only\cite{Guo:2018:RDH:3269206.3271709}.
+However, social contexts are unavailable before being shared.
+Hence, there is also a work that generates words likely to be appeared in comments from the news by CVAE to detect fake news when they are just posted\cite{ijcai2018-533}.
+Although their work tries to generate comments, they have only achieved to produce words that have a high probability of appearing in the comments.
 
-In this work, we will propose a model that evaluates news credibility by news text and generated comments.
-This model is modified from generating fake news articles\cite{NIPS2019_9106} and this model trains not only news features but also generating comments.
-In training, this sequence includes real posted comments but the test sequence does not use them to simulate operation in real-social media.
-The skill of generating comments help classification in the test sequence.
+In this work, we will propose a generation model that evaluates news credibility by news text and generated comments.
+This model is modified from generating fake news articles\cite{NIPS2019_9106} and this model learns not only news features but also how to generate comments.
+In training, this sequence includes real posted comments but the test sequence does not use them.
+The skill of generating comments help classification in the test data.
 
-We measure the performance of our proposed method by some experiments with a real-posted dataset.
+We measure the performance of our proposed method by experiments with a real posted dataset.
 
 \section{Related works}
 To detect and classify fake news is not a new topic because it is so similar to detecting spam\cite{shen2017discovering}, rumor\cite{7023340}, and illegal advertisement\cite{Huang:2017:DFO:3041021.3054233}.
