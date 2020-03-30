@@ -152,13 +152,13 @@ Considering the social context, the detection must wait for a while from posting
 Therefore, the Two-Level Convolutional Neural Network with User Response Generator(TCNN-URG) was proposed\cite{ijcai2018-533}.
 This generates comment by hidden variables which are trained by a probability distribution of comments appearance.
 Generated comments can give additional information to classify posts and the model is available even if the news is just posted.
-However, the TCNN-URG generates only words that have a high probability of appearing in a comment and there are no grammar elements.
+However, the TCNN-URG generates only words that have a high probability of appearing in a comment and it generates no grammatical elements.
 
 \subsection{Generating fake news}
 \label{subsec:generate}
 In generating natural language articles, the Grover model made natural neural fake news articles\cite{NIPS2019_9106}.
 This model is trained by a news dataset where news articles are organized in fields such as news domain, author, posted date, title, and article.
-Specifically, this evaluated the prediction of one of the news elements.
+The model was evaluated by the performance of the prediction of one of the news elements.
 An interesting finding made by them is that human beings are more likely to be fooled by generated articles than by real ones.
 We tried to extend this model and generate natural comments.
 \section{methodology}
@@ -206,13 +206,15 @@ This dataset contains sets of a news article and tweets(comments) which refer to
 We chose news articles which have at least three tweets and sampled three tweets for comment generation.
 We prepared 200 sets of news articles and comments for each of the real and fake classes and trained the model to generate comments.
 We used the following indexes to evaluate words appeared in the generated comments:
-the number of the occurrence of the words,
+the number of the occurrence of the words(shown in percentage),
 ratio of the word's occurrence among the total number of words,
-the difference between the percentages for real and fake classes.
+and the difference between the percentages for real and fake classes.
 We converted all alphabets to the lowercase letter.
-We removed the following elements: stop words by NLTK\cite{bird-loper-2004-nltk}, 
-url(starts with \textit{http, https}), and ascii symbols.
-We didn't remove mentions, colons, and hashtags(i.e. @anyone, analyze:, \#anything).
+We removed the following elements: stop words provided by NLTK\cite{bird-loper-2004-nltk}, 
+url(starts with \textit{http}),
+ and symbols such as quotation, period, comma, and so on in order to investigate the frequency of not symbols but words accurately.
+On the other hand, we spared mentions, colons, and hashtags(i.e. @anyone, analyze:, \#anything)
+ because the addition of these symbols serves different purposes in the social networks.
 We found the following by the analysis of the generated comments:
 \begin{itemize}[\IEEEsetlabelwidth{3}]
     \item The most frequent word was ``via''(approx. 1.5\%) in the aggregated frequency in real and fake.  
@@ -220,15 +222,15 @@ We found the following by the analysis of the generated comments:
 \end{itemize}
 We also found the following from the difference between generated comments from real and fake news.
 \begin{itemize}[\IEEEsetlabelwidth{3}]
-    \item ``Via'' was also the top frequency of generated word from both real and fake. 
+    \item The word ``via'' was also the top frequency of generated word from both real and fake. 
     \item The percent of the frequency of ``via'' in generated comments from fake news article was twice as much as ones from real news.
-    \item ``Via'' was also the word with the largest margin of the percentages between real and fake classes. 
+    \item The word ``via'' was also the word with the largest margin of the percentages between real and fake classes. 
     The margin was approx. 0.9 point.
-    \item ``Breaking:'' was the word with the second-largest margin of the percentages between real and fake classes, 
+    \item The word ``breaking:'' was the word with the second-largest margin of the percentages between real and fake classes, 
     where one for the fake was more than the real. 
     The margin was approx. 0.7 point.
 \end{itemize}
-\subsection{Quality of classify}
+\subsection{Quality of classification}
 We measured the effect of generated comments for classification by comparing classification results with and without the generated comments.
 We prepared baselines: classification with the news article only, and with the article and two real-posted comments.
 In this experiment, we used pairs of an article of
@@ -258,15 +260,15 @@ our proposed method seemed to be trained by the topics of news articles.
 Most of the generated comments referred to topics of politics and this may be caused by the character of the dataset.
 
 An interesting word in the generated comments is ``breaking:''.
-Our experiment results showed that this word was more generated by fake news than real news.
-This phenomenon was not confirmed in the research of TCNN-URG\cite{ijcai2018-533}.
-Their research claimed that ``!'', ``?'' and any words were important signals of fake news.
+Our experimental results showed that the word was generated more by fake news than real news.
+The phenomenon was not reported in the research of TCNN-URG\cite{ijcai2018-533}.
+Their research claimed that ``!'', ``?'', ``false'', and so on were important signals of fake news.
 "Breaking:" maybe also signal of fake news.
 
-The grammatical quality of the generated comments was clearly not as good as the need to do human A/B testing.
+The grammatical quality of the generated comments was clearly poor.
 This is caused by a lack of dataset scale. 
 Grover model was built using 120 gigabytes of dataset\cite{NIPS2019_9106}.
-We need to search or get a larger dataset of sets of articles and tweets.
+We need to search or get a larger dataset of articles and tweets.
 
 \subsection{classification}
 According to TABLE \ref{tbl:classify_results}, our proposed model achieved the best recall score however in precision its performance was worst.
