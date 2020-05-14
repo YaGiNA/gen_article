@@ -122,7 +122,8 @@ Trying to supplement information for detection,
 there are some works which aggregate social context(i.e. retweet, like, and comments)
 report better results than considering news text only\cite{Guo:2018:RDH:3269206.3271709}.
 However, social contexts are unavailable before being shared.
-Hence, there is also a work that generates words likely to be appeared in comments from the news by CVAE to detect fake news when they are just posted\cite{ijcai2018-533}.
+Hence, there is also a work that generates words likely to be appeared in comments from the news by Conditional Variational AutoEncoder to detect fake news when they are just posted\cite{ijcai2018-533}.
+This model uses hidden variables from article with probability distribution and labels.
 Although their work tries to generate comments, they have only achieved to produce words that have a high probability of appearing in the comments.
 
 In this work, we will propose a generation model that evaluates news credibility by news text and generated comments.
