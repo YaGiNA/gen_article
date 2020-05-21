@@ -123,7 +123,7 @@ Trying to supplement information for detection,
 there are some works which aggregate social context(i.e. retweet, like, and comments)
 report better results than considering news text only\cite{Guo:2018:RDH:3269206.3271709}.
 However, social contexts are unavailable before being shared.
-Hence, there is also a work that generates words likely to be appeared in comments from the news by Conditional Variational AutoEncoder to detect fake news when they are just posted\cite{ijcai2018-533}.
+Hence, there is also a work that generates words likely to be appeared in comments from the news by Conditional Variational AutoEncoder(CVAE) to detect fake news when they are just posted\cite{ijcai2018-533}.
 This model uses hidden variables from article with probability distribution and labels.
 Although their work tries to generate comments, they have only achieved to produce words that have a high probability of appearing in the comments.
 
@@ -167,8 +167,8 @@ We tried to extend this model and generate natural comments.
 
 
 \section{methodology}
-This unconditional text generation model is one of language modeling problems.
-A previous work\cite{10.5555/944919.944966} defined a document
+This unconditional text generation model is one of the language modeling problems.
+Previous work\cite{10.5555/944919.944966} defined a document
 $x = \mathrm{w}_1^T = (\mathrm{w}_1, \mathrm{w}_2, ..., \mathrm{w}_T)$
 as the product of the conditional probabilities to generate word $\mathrm{w}_t$
 by previous words $ \mathrm{w}_1^{t-1}$ like below:
@@ -179,7 +179,7 @@ by previous words $ \mathrm{w}_1^{t-1}$ like below:
 \end{equation}
 
 As we saw in \ref{subsec:generate}, the original Grover model was trained by a news dataset which had five parts.
-Each part is attached start and end tokens in order to efficient learning and generation\cite{NIPS2019_9106}.
+Each part is attached to the start and end tokens in order to efficient learning and generation\cite{NIPS2019_9106}.
 After the training, data without the tags are given to evaluate prediction performance.
 We replaced the fields other than the article with three comments and tried to predict one of the comments from the other fields.
 We modeled the generation model by the joint distribution like the original one:
@@ -187,10 +187,10 @@ We modeled the generation model by the joint distribution like the original one:
     \label{eq:joint_distri}
     p = (\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
 \end{equation}
-This model's diagram in generation is shown in Fig. \ref{fig:method}.
+This model's diagram in a generation is shown in Fig. \ref{fig:method}.
 Following Grover's method, we separated document fields randomly into two sets.
 We also randomly drop out individual fields with probability 10\%, and drop out all but the body with probability 35\%\cite{NIPS2019_9106}.
-The generation model will be trained for minimize the cross-entropy in prediction in one field set followed by the tokens in another set.
+The generation model will be trained to minimize the cross-entropy in prediction in one fieldset followed by the tokens in another set.
 Basically it was constructed by replacing fields in Grover model’s news structure with comments, except for article.
 The purpose of our model was to generate not articles but comments likely to be written by humans.
 
@@ -205,9 +205,12 @@ The purpose of our model was to generate not articles but comments likely to be 
 \end{figure*}
 
 The last token of integrated news fields was \texttt{[CLS]} and this was used for classification into real/fake.
-This is a same method as for GPT-2\cite{Radford_GPT2}.
+This is the same method as for GPT-2\cite{Radford_GPT2}.
 The original one was made for the generation of fake news but our proposed model was arranged to generate comments.
 Fig.\ref{fig:process} shows our process of experiment.
+First of all, we sampled dataset's instances by conditions and we trained in comment generation.
+In the classification, we cut a comment from each instance and replaced it to generated comments by the other fields(a document and two comments) by trained comment generator.
+The classifier trained these instances and we compared results with instances which did not have generated comments.
 
 \begin{figure*}[!t]
     \centering
