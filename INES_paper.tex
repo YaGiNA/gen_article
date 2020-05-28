@@ -168,7 +168,7 @@ We tried to extend this model and generate natural comments.
 
 \section{methodology}
 According to a previous work\cite{10.5555/944919.944966},
-an unconditional text generation model is a language modeling problem.
+a text generation model is a language modeling problem.
 This is defined a document
 $x = \mathrm{w}_1^T = (\mathrm{w}_1, \mathrm{w}_2, ..., \mathrm{w}_T)$
 as the product of the conditional probabilities to generate word $\mathrm{w}_t$
@@ -184,16 +184,17 @@ As we saw in \ref{subsec:generate}, the original Grover model was trained by a n
 Each part is attached to the start and end tokens in order to facilitate efficient learning and generation\cite{NIPS2019_9106}.
 After the training, data without the tags are given to evaluate prediction performance.
 We replaced the fields other than the article with three comments and tried to predict one of the comments from the other fields.
+We defined a field set of an article and three comments as an instance.
 We modeled the generation model by the joint distribution like the original one:
 \begin{equation}
     \label{eq:joint_distri}
-    p = (\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
+    p(\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
 \end{equation}
-Following Grover's method, we separated document fields randomly into two sets.
-We also randomly drop out individual fields with probability 10\%, and drop out all but the article body with probability 35\%\cite{NIPS2019_9106}.
-The generation model will be trained to minimize the cross-entropy in prediction in one fieldset followed by the tokens in another set.
-Basically it was constructed by replacing fields in Grover model’s news structure with comments, except for article.
-The purpose of our model was to generate not articles but comments likely to be written by SNS users.
+Following Grover's method, we partitioned randomly the document fields into two sets.
+We also drop out randomly individual fields to train prediction with probability 10\%, and drop out all but the article body with probability 35\%\cite{NIPS2019_9106}.
+The generation model will be trained to minimize the cross-entropy in prediction in one field set followed by the tokens in another set.
+Basically our model was constructed by replacing fields in Grover model’s news structure with comments, except for article.
+The purpose of our model is to generate not articles but comments likely to be written by SNS users.
 
 \begin{figure*}[!t]
     \centering
@@ -210,8 +211,8 @@ This is the same method as for GPT-2\cite{Radford_GPT2}.
 Although the original one was designed for the generation of fake news, our proposed model was arranged to generate comments.
 Fig.\ref{fig:process} shows the process of our experiment.
 First of all, we sampled dataset's instances and we trained a model to generate comments.
-In the classification, we cut a comment from each instance and replaced it to generated comments by the other fields(a document and two comments) by trained comment generator.
-The classifier trained these instances and we compared results with instances which did not have generated comments.
+In the classification, we removed a comment from each instance and replaced with a generated comment by inference of the trained comment generator from the other fields(a document and two comments).
+The classifier learned these instances and we compared results with instances which did not have generated comments.
 
 \begin{figure*}[!t]
     \centering
