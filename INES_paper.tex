@@ -123,7 +123,7 @@ Trying to supplement information for detection,
 there are some works which aggregate social context(i.e. retweet, like, and comments)
 report better results than considering news text only\cite{Guo:2018:RDH:3269206.3271709}.
 However, social contexts are unavailable before being shared.
-Hence, there is also a work that generates words likely to be appeared in comments from the news by Conditional Variational AutoEncoder(CVAE) to detect fake news when they are just posted\cite{ijcai2018-533}.
+Hence, there is also a work that generates words likely to be appeared in comments from the news by Conditional Variational AutoEncoder (CVAE) to detect fake news when they are just posted\cite{ijcai2018-533}.
 This model uses hidden variables from article with probability distribution and labels.
 Although their work tries to generate comments, they have only achieved to produce words that have a high probability of appearing in the comments.
 
@@ -167,8 +167,9 @@ We tried to extend this model and generate natural comments.
 
 
 \section{methodology}
-This unconditional text generation model is one of the language modeling problems.
-Previous work\cite{10.5555/944919.944966} defined a document
+According to a previous work\cite{10.5555/944919.944966},
+a text generation model is a language modeling problem.
+This is defined a document
 $x = \mathrm{w}_1^T = (\mathrm{w}_1, \mathrm{w}_2, ..., \mathrm{w}_T)$
 as the product of the conditional probabilities to generate word $\mathrm{w}_t$
 by previous words $ \mathrm{w}_1^{t-1}$ like below:
@@ -178,21 +179,22 @@ by previous words $ \mathrm{w}_1^{t-1}$ like below:
     p(x) = p(\mathrm{w}_1^T) = \prod_{t=1}^{T} p(\mathrm{w}_t|\mathrm{w}_1^{t-1})
 \end{equation}
 
+This model's diagram in a generation is shown in Fig. \ref{fig:method}.
 As we saw in \ref{subsec:generate}, the original Grover model was trained by a news dataset which had five parts.
-Each part is attached to the start and end tokens in order to efficient learning and generation\cite{NIPS2019_9106}.
+Each part is attached to the start and end tokens in order to facilitate efficient learning and generation\cite{NIPS2019_9106}.
 After the training, data without the tags are given to evaluate prediction performance.
 We replaced the fields other than the article with three comments and tried to predict one of the comments from the other fields.
+We defined a field set of an article and three comments as an instance.
 We modeled the generation model by the joint distribution like the original one:
 \begin{equation}
     \label{eq:joint_distri}
-    p = (\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
+    p(\rm{article}, \rm{comment\_1}, \rm{comment\_2}, \rm{comment\_3})
 \end{equation}
-This model's diagram in a generation is shown in Fig. \ref{fig:method}.
-Following Grover's method, we separated document fields randomly into two sets.
-We also randomly drop out individual fields with probability 10\%, and drop out all but the body with probability 35\%\cite{NIPS2019_9106}.
-The generation model will be trained to minimize the cross-entropy in prediction in one fieldset followed by the tokens in another set.
-Basically it was constructed by replacing fields in Grover model’s news structure with comments, except for article.
-The purpose of our model was to generate not articles but comments likely to be written by humans.
+Following Grover's method, we partitioned randomly the document fields into two sets.
+We also drop out randomly individual fields to train prediction with probability 10\%, and drop out all but the article body with probability 35\%\cite{NIPS2019_9106}.
+The generation model will be trained to minimize the cross-entropy in prediction in one field set followed by the tokens in another set.
+Basically our model was constructed by replacing fields in Grover model’s news structure with comments, except for article.
+The purpose of our model is to generate not articles but comments likely to be written by SNS users.
 
 \begin{figure*}[!t]
     \centering
@@ -204,13 +206,13 @@ The purpose of our model was to generate not articles but comments likely to be 
     \label{fig:method}
 \end{figure*}
 
-The last token of integrated news fields was \texttt{[CLS]} and this was used for classification into real/fake.
+The last token of news fields which are integrated with begin/end token is \texttt{[CLS]} and this is used for classification into real/fake.
 This is the same method as for GPT-2\cite{Radford_GPT2}.
-The original one was made for the generation of fake news but our proposed model was arranged to generate comments.
-Fig.\ref{fig:process} shows our process of experiment.
-First of all, we sampled dataset's instances by conditions and we trained in comment generation.
-In the classification, we cut a comment from each instance and replaced it to generated comments by the other fields(a document and two comments) by trained comment generator.
-The classifier trained these instances and we compared results with instances which did not have generated comments.
+Although the original one was designed for the generation of fake news, our proposed model was arranged to generate comments.
+Fig.\ref{fig:process} shows the process of our experiment.
+First of all, we sampled dataset's instances and we trained a model to generate comments.
+In the classification, we removed a comment from each instance and replaced with a generated comment by inference of the trained comment generator from the other fields(a document and two comments).
+The classifier learned these instances and we compared results with instances which did not have generated comments.
 
 \begin{figure*}[!t]
     \centering
@@ -306,10 +308,10 @@ We will check if the trend is changed by using a larger dataset.
 
 \section{conclusion}
 This article tried to solve problems in the early detection of fake news.
-We focused on user's comments gave important information to evaluate news documents but there are few comments in early detection.
+We focused on the fact that although user’s comments might provide important information to evaluate news documents there are few comments in an early stage of news propagation.
 Therefore, we made a neural network model that was extended from the Grover model to generate comments to help classification.
-We experimented to measure our proposed model's performance in early detection with generating a comments.
-The results suggested that the process of generating comments may help classifier to decide real or fake. 
+We experimented to evaluate our proposed model's performance in early detection with generating a comments.
+The results suggested that the process of generating comments may help the classifiers in fact-checking to decide real or fake. 
 
 \appendix[Settings of experiments]
 \label{app:settings}
